@@ -19,6 +19,7 @@ var synchAccounts = function synchAccounts() {
   (0, _jquery2.default)('#accounts').html("");
   web3.eth.accounts.forEach(function (account) {
     var balance = web3.eth.getBalance(account);
+    balance = web3.fromWei(balance);
     (0, _jquery2.default)('#accounts').append('<p><a href="#" class="from">from</a> <a href="#" class="to">to</a> <span class="address">' + account + '</span> | <span class="balance">ETH ' + balance + '</span></p>');
   });
 };
@@ -43,7 +44,7 @@ synchAccounts();
   var from = (0, _jquery2.default)('#sender-address').val();
   var to = (0, _jquery2.default)('#recipient-address').val();
   var amount = (0, _jquery2.default)('#amount').val();
-  var transaction = { from: from, to: to, value: amount };
+  var transaction = { from: from, to: to, value: web3.toWei(amount) };
   console.log('Sending transaction... ' + JSON.stringify(transaction));
   web3.eth.sendTransaction(transaction, function (error, transactionHash) {
     console.log('Transaction: ' + transactionHash);
@@ -54,11 +55,15 @@ synchAccounts();
         (0, _jquery2.default)("#transaction-info").find("#nonce").text(transactionInfo.nonce);
         (0, _jquery2.default)("#transaction-info").find("#block-hash").text(transactionInfo.blockHash);
         (0, _jquery2.default)("#transaction-info").find("#block-number").text(transactionInfo.blockNumber);
+        (0, _jquery2.default)("#transaction-info").find("#gas-limit").text(web3.eth.getBlock("latest").gasLimit);
+        (0, _jquery2.default)("#transaction-info").find("#gas-price").text(web3.fromWei(transactionInfo.gasPrice, "gwei"));
+        (0, _jquery2.default)("#transaction-info").find("#transaction-cost").text(web3.fromWei(transactionInfo.gasPrice * transactionInfo.gas));
+        (0, _jquery2.default)("#transaction-info").find("#transaction-cost-gwei").text(web3.fromWei(transactionInfo.gasPrice * transactionInfo.gas, "gwei"));
         (0, _jquery2.default)("#transaction-info").find("#gas-usage").text(transactionInfo.gas);
         (0, _jquery2.default)("#transaction-info").find("#transaction-index").text(transactionInfo.transactionIndex);
         (0, _jquery2.default)("#transaction-info").find("#from").text(transactionInfo.from);
         (0, _jquery2.default)("#transaction-info").find("#to").text(transactionInfo.to);
-        (0, _jquery2.default)("#transaction-info").find("#value").text(transactionInfo.value);
+        (0, _jquery2.default)("#transaction-info").find("#value").text(web3.fromWei(transactionInfo.value));
         synchAccounts();
       }
     });
@@ -10887,7 +10892,7 @@ Buffer.prototype.slice = function slice (start, end) {
  * Need to make sure that buffer isn't trying to write out of bounds.
  */
 function checkOffset (offset, ext, length) {
-  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint256')
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
   if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
 }
 
@@ -23839,53 +23844,36 @@ utils.intFromLE = intFromLE;
 module.exports={
   "_args": [
     [
-      {
-        "name": "elliptic",
-        "raw": "elliptic@^6.0.0",
-        "rawSpec": "^6.0.0",
-        "scope": null,
-        "spec": ">=6.0.0 <7.0.0",
-        "type": "range"
-      },
-      "/Users/facu/Documents/Laburo/Spiking/Ethereum/1-interacting-with-the-blockchain/node_modules/browserify-sign"
+      "elliptic@https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
+      "D:\\repos\\ethereum-spiking\\1-interacting-with-the-blockchain"
     ]
   ],
-  "_from": "elliptic@>=6.0.0 <7.0.0",
+  "_development": true,
+  "_from": "elliptic@https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
   "_id": "elliptic@6.4.0",
-  "_inCache": true,
-  "_installable": true,
+  "_inBundle": false,
+  "_integrity": "sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=",
   "_location": "/elliptic",
-  "_nodeVersion": "7.0.0",
-  "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/elliptic-6.4.0.tgz_1487798866428_0.30510620190761983"
-  },
-  "_npmUser": {
-    "email": "fedor@indutny.com",
-    "name": "indutny"
-  },
-  "_npmVersion": "3.10.8",
   "_phantomChildren": {},
   "_requested": {
+    "type": "remote",
+    "raw": "elliptic@https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
     "name": "elliptic",
-    "raw": "elliptic@^6.0.0",
-    "rawSpec": "^6.0.0",
-    "scope": null,
-    "spec": ">=6.0.0 <7.0.0",
-    "type": "range"
+    "escapedName": "elliptic",
+    "rawSpec": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
+    "saveSpec": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
+    "fetchSpec": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz"
   },
   "_requiredBy": [
     "/browserify-sign",
     "/create-ecdh"
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
-  "_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
-  "_shrinkwrap": null,
-  "_spec": "elliptic@^6.0.0",
-  "_where": "/Users/facu/Documents/Laburo/Spiking/Ethereum/1-interacting-with-the-blockchain/node_modules/browserify-sign",
+  "_spec": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
+  "_where": "D:\\repos\\ethereum-spiking\\1-interacting-with-the-blockchain",
   "author": {
-    "email": "fedor@indutny.com",
-    "name": "Fedor Indutny"
+    "name": "Fedor Indutny",
+    "email": "fedor@indutny.com"
   },
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
@@ -23916,15 +23904,9 @@ module.exports={
     "jshint": "^2.6.0",
     "mocha": "^2.1.0"
   },
-  "directories": {},
-  "dist": {
-    "shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
-    "tarball": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz"
-  },
   "files": [
     "lib"
   ],
-  "gitHead": "6b0d2b76caae91471649c8e21f0b1d3ba0f96090",
   "homepage": "https://github.com/indutny/elliptic",
   "keywords": [
     "EC",
@@ -23934,15 +23916,7 @@ module.exports={
   ],
   "license": "MIT",
   "main": "lib/elliptic.js",
-  "maintainers": [
-    {
-      "email": "fedor@indutny.com",
-      "name": "indutny"
-    }
-  ],
   "name": "elliptic",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/indutny/elliptic.git"
@@ -42395,7 +42369,7 @@ var f = require('./formatters');
 var SolidityTypeAddress = require('./address');
 var SolidityTypeBool = require('./bool');
 var SolidityTypeInt = require('./int');
-var SolidityTypeUInt = require('./uint256');
+var SolidityTypeUInt = require('./uint');
 var SolidityTypeDynamicBytes = require('./dynamicbytes');
 var SolidityTypeString = require('./string');
 var SolidityTypeReal = require('./real');
@@ -42616,7 +42590,7 @@ var coder = new SolidityCoder([
 
 module.exports = coder;
 
-},{"./address":193,"./bool":194,"./bytes":195,"./dynamicbytes":197,"./formatters":198,"./int":199,"./real":201,"./string":202,"./uint256":204,"./ureal":205}],197:[function(require,module,exports){
+},{"./address":193,"./bool":194,"./bytes":195,"./dynamicbytes":197,"./formatters":198,"./int":199,"./real":201,"./string":202,"./uint":204,"./ureal":205}],197:[function(require,module,exports){
 var f = require('./formatters');
 var SolidityType = require('./type');
 
@@ -42780,11 +42754,11 @@ var formatOutputInt = function (param) {
 };
 
 /**
- * Formats right-aligned output bytes to uint256
+ * Formats right-aligned output bytes to uint
  *
  * @method formatOutputUInt
  * @param {SolidityParam}
- * @returns {BigNumeber} right-aligned output bytes formatted to uint256
+ * @returns {BigNumeber} right-aligned output bytes formatted to uint
  */
 var formatOutputUInt = function (param) {
     var value = param.staticPart() || "0";
@@ -43398,19 +43372,19 @@ var f = require('./formatters');
 var SolidityType = require('./type');
 
 /**
- * SolidityTypeUInt is a prootype that represents uint256 type
+ * SolidityTypeUInt is a prootype that represents uint type
  * It matches:
- * uint256
- * uint256[]
- * uint256[4]
- * uint256[][]
- * uint256[3][]
- * uint256[][6][], ...
+ * uint
+ * uint[]
+ * uint[4]
+ * uint[][]
+ * uint[3][]
+ * uint[][6][], ...
  * uint32
  * uint64[]
  * uint8[4]
  * uint256[][]
- * uint256[3][]
+ * uint[3][]
  * uint64[][6][], ...
  */
 var SolidityTypeUInt = function () {
@@ -43422,7 +43396,7 @@ SolidityTypeUInt.prototype = new SolidityType({});
 SolidityTypeUInt.prototype.constructor = SolidityTypeUInt;
 
 SolidityTypeUInt.prototype.isType = function (name) {
-    return !!name.match(/^uint256([0-9]*)?(\[([0-9]*)\])*$/);
+    return !!name.match(/^uint([0-9]*)?(\[([0-9]*)\])*$/);
 };
 
 module.exports = SolidityTypeUInt;
