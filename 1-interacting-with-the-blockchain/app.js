@@ -43,10 +43,10 @@ $('#send-ether').click(() => {
         $("#transaction-info").find("#nonce").text(transactionInfo.nonce);
         $("#transaction-info").find("#block-hash").text(transactionInfo.blockHash);
         $("#transaction-info").find("#block-number").text(transactionInfo.blockNumber);
-        $("#transaction-info").find("#gas-limit").text(web3.eth.getBlock("latest").gasLimit);
+        $("#transaction-info").find("#gas-limit").text("Fill me in with the block's gas limit!");
         $("#transaction-info").find("#gas-price").text(web3.fromWei(transactionInfo.gasPrice, "gwei"));
-        $("#transaction-info").find("#transaction-cost").text(web3.fromWei(transactionInfo.gasPrice*transactionInfo.gas));
-        $("#transaction-info").find("#transaction-cost-gwei").text(web3.fromWei(transactionInfo.gasPrice*transactionInfo.gas, "gwei"));
+        $("#transaction-info").find("#transaction-cost").text("Fill me in!");
+        $("#transaction-info").find("#transaction-cost-gwei").text("Fill me in!");
         $("#transaction-info").find("#gas-usage").text(transactionInfo.gas);
         $("#transaction-info").find("#transaction-index").text(transactionInfo.transactionIndex);
         $("#transaction-info").find("#from").text(transactionInfo.from);
