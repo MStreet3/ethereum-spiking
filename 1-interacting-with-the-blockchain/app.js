@@ -10,6 +10,7 @@ const synchAccounts = () => {
   $('#accounts').html("");
   web3.eth.accounts.forEach(account => {
     let balance = web3.eth.getBalance(account);
+    balance = web3.fromWei(balance);
     $('#accounts').append(`<p><a href="#" class="from">from</a> <a href="#" class="to">to</a> <span class="address">${account}</span> | <span class="balance">ETH ${balance}</span></p>`);
   });
 };
@@ -30,7 +31,7 @@ $('#send-ether').click(() => {
   let from = $('#sender-address').val();
   let to = $('#recipient-address').val();
   let amount = $('#amount').val();
-  let transaction = { from: from, to: to, value: amount };
+  let transaction = { from: from, to: to, value: web3.toWei(amount) };
   console.log(`Sending transaction... ${JSON.stringify(transaction)}`);
   web3.eth.sendTransaction(transaction, function (error, transactionHash) {
     console.log(`Transaction: ${transactionHash}`);
