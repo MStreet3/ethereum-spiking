@@ -1,11 +1,11 @@
 # Deploying instructions
 1. Run `npm install`
-2. Run `npx truffle develop`
-3. Run `truffle migrate`
+2. Run `truffle develop`
+3. Run `migrate` within `truffle` console.
 
 # Running instructions
 1. Run `npm install` 
-2. Run `npx truffle develop` 
+2. Run `truffle develop` 
 3. Open `index.html` and start playing 
 4. Run `npm start` if are editing any JS file
 
